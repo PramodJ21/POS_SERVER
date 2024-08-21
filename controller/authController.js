@@ -1,21 +1,10 @@
 var userDb = require('../model/Users.json')
-const roleDb = require('../model/roles.json')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const fsPromises = require('fs').promises
 const path = require('path')
 
-function getRoleName(roleId) {
-    // Loop through the roles object to find the matching role name
-    for (const [roleId, role] of Object.entries(roleDb)) {
-        if (role === roleId) {
-            return role;
-        }
-    }
-    // Return null or throw an error if the role name is not found
-    return null; 
-}
 const authConroller = async (req,res) => {
     const {username, password} = req.body
     if(!username || !password) return res.status(400).json({msg:"Username and password cannot be blank"})

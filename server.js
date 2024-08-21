@@ -6,12 +6,15 @@ const cookieParser = require("cookie-parser")
 const credentials = require('./middleware/credentials')
 const corsOptions = require('./config/corsOptions')
 const cors = require('cors')
+
+//Middlware
 app.use(credentials)
 app.use(cors(corsOptions))
 app.use(express.json())
 
 app.use(cookieParser())
 
+//routes
 app.use('/register', require('./routes/register'))
 app.use('/auth', require('./routes/auth'))
 app.use('/refresh', require('./routes/refresh'))
@@ -24,6 +27,8 @@ app.use('/verifyUser', require('./routes/verifyUser'))
 app.use('/deleteUser', require('./routes/deleteUser'))
 app.use('/storeSales', require('./routes/storeSales'))
 app.use('/getSales', require('./routes/getSales'))
+app.use('/masters',require('./routes/masters'))
+app.use('/purchase',require('./routes/purchase'))
 app.get('/test', (req,res)=>{res.json("Helloo HOw are you")})
 
 app.listen(3500, ()=>{console.log(`Server running at port 3500`)})
